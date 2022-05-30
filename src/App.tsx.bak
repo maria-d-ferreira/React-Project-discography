@@ -1,0 +1,52 @@
+import React, { useState } from "react";
+
+import discography from "./discography/discography";
+
+import Album from "./components/Album";
+import Tracks from "./components/Tracks";
+
+import "./App.css";
+
+const App: React.FC = () => {
+  const [selectedAlbum, setSelectedAlbum] = useState({});
+  const [showAll, setShowAll] = useState(true);
+
+  const handleShowAlbum = (id: number) => {
+    const newAlbum = discography.filter(album => album.id === id);
+    setSelectedAlbum(newAlbum);
+    setShowAll(() => !showAll);
+  };
+
+  const handleShowDiscography = () => {
+    setShowAll(() => !showAll);
+  };
+
+  return (
+    <>
+      {showAll ? (
+        <section>
+          <ul className="album-list">
+            {discography.map(album => (
+              <Album
+                key={album.id}
+                id={album.id}
+                cover={album.cover}
+                title={album.title}
+                handleShowAlbum={() => handleShowAlbum}
+              />
+            ))}
+          </ul>
+        </section>
+      ) : (
+        <section>
+          <Tracks
+            selectedAlbum={selectedAlbum}
+            handleShowDiscography={() => handleShowDiscography}
+          />
+        </section>
+      )}
+    </>
+  );
+};
+
+export default App;
