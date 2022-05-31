@@ -27,7 +27,7 @@ const Album: React.FC<Props> = props => {
         <h2>{title}</h2>
         <h4>{year}</h4>
         <button onClick={toggleShow}>
-          {!showSongs ? "Songs" : "Discography"}
+          {!showSongs ? "Songs" : "Discograhy"}
         </button>
         {showSongs && (
           <ul className="songs-ul">
